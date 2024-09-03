@@ -1,3 +1,5 @@
+---
+
 # Dockerized FastAPI Development Environment
 
 A streamlined Dockerized environment for developing and running FastAPI applications with ease.
@@ -66,6 +68,8 @@ Ensure you have the following installed on your machine:
 ## 🤝 Contributing
 
 We welcome contributions! Please feel free to open an issue or submit a pull request if you'd like to help improve this project.
+
+---
 
 ## 📜 License
 
