@@ -1,0 +1,154 @@
+To Build the project, run the following command:
+```
+    docker build -t <image_name> .      //i am using name fastapi-image
+```
+
+
+To check the image is created or not, run the following command:
+```
+    docker images
+```
+
+
+To run the docker image in a container, run the following command:
+```
+    docker run --name <container_name> -d -p 80:80 <image_name>    //i am using name fastapi-container
+```
+eg
+```
+    docker run --name fastapi-container -d -p 80:80 fastapi-image  //bcz i am using port 80
+```
+
+-d is used to run the container in the background.
+if you want to run the container in the foreground, remove -d from the command.
+
+
+To check the container is running or not, run the following command:
+```
+    docker ps
+```
+
+To check the logs of the container, run the following command:
+```
+    docker logs <container_name>    //i am using name fastapi-container
+```
+
+To stop the container, run the following command:
+```
+    docker stop <container_name>    //i am using name fastapi-container
+```
+
+To check the logs of the container in real-time, run the following command:
+```
+    docker logs -f <container_name>    //i am using name fastapi-container
+```
+
+To start the container, run the following command:
+```
+    docker start <container_name>    //i am using name fastapi-container
+```
+
+To start in containerbackground mode, run the following command:
+```
+    docker start -d <container_name>    //i am using name fastapi-container
+```
+
+To remove the container, run the following command:
+```
+    docker rm <container_name>    //i am using name fastapi-container
+```
+
+To remove the image, run the following command:
+
+```
+    docker rmi <image_name>    //i am using name fastapi-image
+```
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+If we want to run the container with sync folder, we can use the following command:
+```
+    docker run --name <container_name> -d -p 80:80 -v <host_folder>:<container_folder> <image_name>    //i am using name fastapi-container
+```
+
+-v is used to sync the folder between the host and the container.
+
+eg
+
+```
+    docker run --name fastapi-container -p 80:80 -d -v $(pwd):/code fastapi-image
+```
+
+$(pwd) is used to get the current directory path.
+
+To check the synced folder, run the following command:
+```
+    docker exec -it <container_name> /bin/bash    //i am using name fastapi-container
+```
+
+
+// now till here , we have install all the library in the docker container and run the fastapi app in the container
+//hence we can see in our py file, where we can see fastapi is not installed in our local machine but it is running in the container
+
+//now we will see how to run the fastapi app in the container and access it from the local machine
+// install two extension in the vs code
+// 1. docker extension
+// 2. dev container extension
+
+//now in the bottom left we can see the yellow color icon, click on that and select reopen in container
+//select attach to running container
+//select you running container
+
+//it will open the new vs code window connected to the container, or we can say we open the container remote in the vs code
+
+
+
+//since command are too big need to add port and all, so we can add the docker-compose.yml file
+
+services:
+  app:
+    build: .
+    container_name: python-server
+    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --reload
+    ports:
+      - "80:80"
+    volumes:
+      - .:/code
+
+
+now for start the container we can use the following command
+```
+    docker-compose up
+```
+
+for stop the container we can use the following command
+```
+    docker-compose down
+```
+
+
+now if u want to use like redis or any other service, we can add the service in the docker-compose.yml file
+
+eg
+
+services:
+  app:
+    build: .
+    container_name: python-server
+    command: uvicorn src.main:app --host
+    ports:
+      - "80:80"
+    volumes:
+        - .:/code
+    depends_on:
+        - redis
+
+    redis:
+        image: redis
+        container_name: redis-server
+        ports:
+            - "6379:6379"
+
+
+//it will start the redis server also with the fastapi app
