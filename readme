@@ -1,0 +1,61 @@
+
+## Getting Started
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Installation
+
+1. Clone the repository:
+
+    ```sh
+    git clone url
+    cd docker-dev-env
+    ```
+
+2. Build and start the Docker containers:
+
+    ```sh
+    docker-compose up --build
+    ```
+
+3. The application should now be running and accessible at `http://localhost:80`.
+
+### Usage
+
+- To run commands inside the Docker container:
+
+    ```sh
+    docker-compose exec web bash
+    ```
+
+- To stop the Docker containers:
+
+    ```sh
+    docker-compose down
+    ```
+
+## Project Files
+
+- `Dockerfile`: Contains the instructions to build the Docker image.
+- `docker-compose.yml`: Defines the services, networks, and volumes.
+- `src/main.py`: FastAPI application.
+- `requirements.txt`: Python dependencies.
+
+## Built With
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Uvicorn](https://www.uvicorn.org/)
+- [Python](https://www.python.org/)
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
