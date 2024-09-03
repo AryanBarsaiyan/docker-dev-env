@@ -1,5 +1,3 @@
----
-
 # Dockerized FastAPI Development Environment
 
 A streamlined Dockerized environment for developing and running FastAPI applications with ease.
@@ -73,4 +71,3 @@ We welcome contributions! Please feel free to open an issue or submit a pull req
 
 This project is licensed under the [MIT License](LICENSE).
 
----
